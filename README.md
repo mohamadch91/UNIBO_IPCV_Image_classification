@@ -8,6 +8,10 @@ the FGVC-Aircraft dataset.
 
 - `assignment_module_two.ipynb` - complete experiment notebook with markdown,
   training code, ablations, plots, and result tables.
+- `original.ipynb` - untouched assignment statement used as the source for the
+  original markdown cells.
+- `LABS/` - reference lab notebooks whose coding style is followed in the
+  assignment solution.
 - `notes.txt` - original planning notes for the assignment.
 - `README.md` - this repository guide.
 
@@ -46,17 +50,18 @@ Open the notebook:
 jupyter notebook assignment_module_two.ipynb
 ```
 
-The first setup cell contains the main run switches:
+The runtime settings cell contains the main run switches:
 
 ```python
-RUN_PART1 = True
-RUN_PART2A = True
-RUN_PART2B = True
+DOWNLOAD_DATA = True
+RUN_TRAINING = True
 FAST_DEV_RUN = False
+SHOW_DATASET_PREVIEW = True
 ```
 
 For a quick pipeline check, set `FAST_DEV_RUN = True`. For final assignment
-results, keep it `False` and run all training cells.
+results, keep it `False` and run all training cells. Set `RUN_TRAINING = False`
+only when you want to inspect the notebook without starting the experiments.
 
 The dataset is downloaded automatically through
 `torchvision.datasets.FGVCAircraft` into `data/`.
@@ -65,7 +70,8 @@ The dataset is downloaded automatically through
 
 When the notebook is run, it writes generated files under `outputs/`:
 
-- `outputs/checkpoints/*.pt` - best model checkpoint for each experiment.
+- `outputs/ckpts/*.pt` - best model checkpoint for each experiment in the
+  current lab-style notebook.
 - `outputs/histories/*.csv` - per-epoch training and validation metrics.
 - `outputs/*_summary.json` - final test metrics for each experiment.
 - `outputs/final_model_comparison.csv` - combined result table.
