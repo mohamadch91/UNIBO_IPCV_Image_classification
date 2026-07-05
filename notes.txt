@@ -1,0 +1,21 @@
+we should use a cnn lke network but cannot use pre built networks.
+Accuracy of 60% is enough for that step.
+
+After finishing the first model we should do obligation study which means we should first show our best model then changing thw variable to the worse and shows
+that model getting worse and why we choose thisvariables.
+
+we cannot use pytorch prebuilt networks like resnet, vgg, etc. but we can use pytorch to build our own CNN model.
+
+We can use cnn layers in pytorch but 
+
+## second part 
+
+second part is to use resnet-18 on the dataset. We will load the weights and set the hyperparameters of model 1 onto resnet-18. After that, we will train the model with the new hyperparameters and aim to reach 70% accuracy. We can also refer to papers and external resources for guidance.
+
+and after that 2b we can introduce new hyper parametrs
+
+we should do data augmentation.
+
+Also obligation study should be done here again.
+
+Also for example we can just train res-net 18 backbone and freeze the rest layers or we can fine-tune the entire model. We should compare the performance of both approaches and analyze the results.
