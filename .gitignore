@@ -1,0 +1,6 @@
+data/
+outputs/
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+Labs/*
