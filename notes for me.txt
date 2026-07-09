@@ -1,0 +1,260 @@
+I changed the the formula of augmentation 
+from 
+
+elif cfg["augmentation"] == "strong":
+        transform_list = [
+            T.RandomResizedCrop(cfg["crop_size"], scale=(0.70, 1.00), ratio=(0.85, 1.15)),
+            T.RandomHorizontalFlip(),
+            T.ColorJitter(brightness=0.25, contrast=0.25, saturation=0.20, hue=0.03),
+            T.ToTensor(),
+            T.Normalize(mean_image_net, std_image_net)
+        ]
+
+
+        to 
+
+        elif cfg["augmentation"] == "strong":
+    transform_list = [
+        T.RandomResizedCrop(
+            cfg["crop_size"],
+            scale=(0.88, 1.0),
+            ratio=(0.95, 1.05),
+        ),
+        T.RandomHorizontalFlip(p=0.5),
+        T.RandomRotation(8),
+        T.ColorJitter(
+            brightness=0.08,
+            contrast=0.08,
+            saturation=0.08,
+            hue=0.01,
+        ),
+        T.ToTensor(),
+        T.Normalize(mean_image_net, std_image_net)
+    ]
+
+
+    Also
+
+     if cfg.get("random_erasing", False):
+        transform_list.append(T.RandomErasing(p=0.10, scale=(0.02, 0.05)))
+        0.2 va 0.12 
+
+
+also this is first model 
+
+
+
+
+class ConvBlock(nn.Module):
+    """Conv -> BN -> ReLU -> (optional) Dropout2d, repeated `num_convs` times, then pool."""
+    def __init__(self, in_channels, out_channels, num_convs=2, pool=True,
+                 use_batch_norm=True, block_dropout=0.0):
+        super().__init__()
+        layers = []
+        c_in = in_channels
+        for _ in range(num_convs):
+            layers.append(nn.Conv2d(c_in, out_channels, kernel_size=3, padding=1,
+                                     bias=not use_batch_norm))
+            if use_batch_norm:
+                layers.append(nn.BatchNorm2d(out_channels))
+            layers.append(nn.ReLU(inplace=True))
+            c_in = out_channels
+        if block_dropout > 0:
+            layers.append(nn.Dropout2d(block_dropout))
+        if pool:
+            layers.append(nn.MaxPool2d(kernel_size=2, stride=2))
+        self.block = nn.Sequential(*layers)
+
+    def forward(self, x):
+        return self.block(x)
+
+
+class AircraftCNN(nn.Module):
+    """
+    Plain VGG-style CNN built from scratch.
+    cfg keys:
+      channels: list of channel widths per stage, e.g. [32, 64, 128, 256]
+      num_convs_per_block: int, default 2
+      use_batch_norm: bool
+      dropout: float, dropout before the final linear layer
+      block_dropout: float, spatial dropout after each conv block
+    """
+    def __init__(self, num_classes: int, cfg: Dict[str, Any]):
+        super().__init__()
+        channels = cfg["channels"]
+        num_convs = cfg.get("num_convs_per_block", 2)
+        use_bn = cfg.get("use_batch_norm", True)
+        block_dropout = cfg.get("block_dropout", 0.0)
+
+        blocks = []
+        in_ch = 3
+        for out_ch in channels:
+            blocks.append(ConvBlock(in_ch, out_ch, num_convs=num_convs, pool=True,
+                                     use_batch_norm=use_bn, block_dropout=block_dropout))
+            in_ch = out_ch
+
+        self.features = nn.Sequential(*blocks)
+
+        self.classifier = nn.Sequential(
+            nn.AdaptiveAvgPool2d((1, 1)),
+            nn.Flatten(),
+            nn.Dropout(cfg.get("dropout", 0.0)),
+            nn.Linear(in_ch, num_classes)
+        )
+
+        self._init_weights()
+
+    def _init_weights(self):
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                nn.init.kaiming_normal_(m.weight, mode="fan_out", nonlinearity="relu")
+                if m.bias is not None:
+                    nn.init.zeros_(m.bias)
+            elif isinstance(m, nn.BatchNorm2d):
+                nn.init.ones_(m.weight)
+                nn.init.zeros_(m.bias)
+            elif isinstance(m, nn.Linear):
+                nn.init.normal_(m.weight, 0, 0.01)
+                nn.init.zeros_(m.bias)
+
+    def forward(self, x):
+        x = self.features(x)
+        x = self.classifier(x)
+        return x
+
+
+def get_custom_cnn(num_classes: int, cfg: Dict[str, Any]) -> nn.Module:
+    return AircraftCNN(num_classes, cfg)
+
+
+
+
+this is cnn_ne_config
+class ConvBlock(nn.Module):
+
+    def __init__(
+        self,
+        in_channels,
+        out_channels,
+        num_convs=2,
+        pool=True,
+        use_batch_norm=True,
+        block_dropout=0.0,
+        first_block=False,
+    ):
+        super().__init__()
+
+        layers = []
+
+        c_in = in_channels
+
+        for i in range(num_convs):
+
+            kernel = 5 if first_block and i == 0 else 3
+
+            padding = kernel // 2
+
+            layers.append(
+                nn.Conv2d(
+                    c_in,
+                    out_channels,
+                    kernel_size=kernel,
+                    padding=padding,
+                    bias=not use_batch_norm,
+                )
+            )
+
+            if use_batch_norm:
+                layers.append(nn.BatchNorm2d(out_channels))
+
+            layers.append(nn.SiLU(inplace=True))
+
+            c_in = out_channels
+
+        if block_dropout > 0:
+            layers.append(nn.Dropout2d(block_dropout))
+
+        if pool:
+            layers.append(nn.MaxPool2d(2))
+
+        self.block = nn.Sequential(*layers)
+
+    def forward(self, x):
+        return self.block(x)
+
+
+class AircraftCNN(nn.Module):
+    def __init__(self, num_classes: int, cfg: Dict[str, Any]):
+        super().__init__()
+        channels = cfg["channels"]
+        num_convs = cfg.get("num_convs_per_block", 2)
+        use_bn = cfg.get("use_batch_norm", True)
+
+        blocks = []
+        in_ch = 3
+        for i, out_ch in enumerate(channels):
+
+            blocks.append(
+                ConvBlock(
+                    in_ch,
+                    out_ch,
+                    num_convs=num_convs,
+                    pool=True,
+                    use_batch_norm=use_bn,
+                    block_dropout=cfg.get("block_dropout", 0.0),
+                    first_block=(i == 0),
+                )
+            )
+
+            in_ch = out_ch
+
+        self.features = nn.Sequential(*blocks)
+        self.classifier = nn.Sequential(
+
+            nn.AdaptiveAvgPool2d((1,1)),
+            nn.Flatten(),
+
+            nn.Linear(in_ch,512),
+            nn.BatchNorm1d(512),
+            nn.SiLU(inplace=True),
+
+            nn.Dropout(cfg.get("dropout",0.25)),
+
+            nn.Linear(512,num_classes)
+        )
+        self._init_weights()
+
+    def _init_weights(self):
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                nn.init.kaiming_normal_(m.weight, mode="fan_out", nonlinearity="relu")
+                if m.bias is not None:
+                    nn.init.zeros_(m.bias)
+            elif isinstance(m, nn.BatchNorm2d):
+                nn.init.ones_(m.weight)
+                nn.init.zeros_(m.bias)
+            elif isinstance(m, nn.Linear):
+                nn.init.normal_(m.weight, 0, 0.01)
+                nn.init.zeros_(m.bias)
+
+    def forward(self, x):
+        x = self.features(x)
+        x = self.classifier(x)
+        return x
+
+
+def get_custom_cnn(num_classes: int, cfg: Dict[str, Any]) -> nn.Module:
+    return AircraftCNN(num_classes, cfg)
+
+now i use residual blocks
+
+residual_block_1 is res
+
+now i changed the lr scheduler to 
+
+self.scheduler = CosineAnnealingLR(
+            self.optimizer,
+            T_max=self.num_epochs * len(train_loader),
+            eta_min=1e-6
+        )
+and add early stopping
