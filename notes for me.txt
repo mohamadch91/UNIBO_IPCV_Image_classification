@@ -276,7 +276,7 @@ and mixup prob and block dropout ro 0
 wd to 1e-4
 add init weight to AirCraftcnn class
 
-run name: residual_block_onecycle_old
+run name: residual_block_onecycle
 
 ---
 
@@ -284,3 +284,10 @@ now I remove centercrop from val data and also make train augmentation ligh :)
 and make channel 512 again
 
 run name: residual_block_aug
+-- 
+try only one of them ligh- no centercrop , strong center crop,strong no center crop
+
+-------
+we reached the 50% goal with light augmentation, and center crop 
+this will be our base for training hyper prarameters
+
