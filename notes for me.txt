@@ -251,6 +251,10 @@ now i use residual blocks
 residual_block_1 is res
 
 now i changed the lr scheduler to 
+run name residual_block_2_lr
+also 
+ Stop training using val_loss
+# Save checkpoints using val_acc
 
 self.scheduler = CosineAnnealingLR(
             self.optimizer,
@@ -258,3 +262,25 @@ self.scheduler = CosineAnnealingLR(
             eta_min=1e-6
         )
 and add early stopping
+run name: residual_block_2_lr
+-----
+
+i revert learning rate scheduler to onecycle lr and and make earlystoping to use val_acc again
+Also remove validation set concating
+
+run name: residual_block_onecycle_old
+
+------
+reduce channel to 256 
+and mixup prob and block dropout ro 0
+wd to 1e-4
+add init weight to AirCraftcnn class
+
+run name: residual_block_onecycle_old
+
+---
+
+now I remove centercrop from val data and also make train augmentation ligh :)
+and make channel 512 again
+
+run name: residual_block_aug
