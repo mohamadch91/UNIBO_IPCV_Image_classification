@@ -21,3 +21,4 @@ Also obligation study should be done here again.
 Also for example we can just train res-net 18 backbone and freeze the rest layers or we can fine-tune the entire model. We should compare the performance of both approaches and analyze the results.
 
 hyperparameters should be on 1 cell for each modification and we should clearly state the changes made to the hyperparameters in each cell.
+
