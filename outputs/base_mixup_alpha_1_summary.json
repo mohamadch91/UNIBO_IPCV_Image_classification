@@ -1,0 +1,36 @@
+{
+  "run_name": "base_mixup_alpha_1",
+  "best_val_acc": 0.5964596459645964,
+  "best_epoch": 67,
+  "test_loss": 1.760826147750731,
+  "test_acc": 0.5946594659465947,
+  "elapsed_min": 79.24745587905248,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 70,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.2,
+    "dropout": 0.25,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "light",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "base_mixup_alpha_1",
+    "mixup_alpha": 1,
+    "mixup_prob": 0.5,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}
