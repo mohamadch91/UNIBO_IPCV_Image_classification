@@ -1,0 +1,38 @@
+{
+  "run_name": "residual_block_aug_light",
+  "best_val_acc": 0.5445544554455446,
+  "best_epoch": 46,
+  "test_loss": 1.7649992196866782,
+  "test_acc": 0.549054905490549,
+  "elapsed_min": 55.92605243523916,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 50,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.1,
+    "dropout": 0.25,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "light",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "residual_block_aug_light",
+    "num_convs_per_block": 2,
+    "block_dropout": 0,
+    "mixup_alpha": 0.2,
+    "mixup_prob": 0,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

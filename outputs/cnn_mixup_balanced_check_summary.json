@@ -1,0 +1,37 @@
+{
+  "run_name": "cnn_mixup_balanced_check",
+  "best_val_acc": 0.011701170117011701,
+  "best_epoch": 2,
+  "test_loss": 4.617244451495931,
+  "test_acc": 0.011701170117011701,
+  "elapsed_min": 4.0700547655423485,
+  "total_parameters": 4738596,
+  "trainable_parameters": 4738596,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 5,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.1,
+    "dropout": 0,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "strong",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "cnn_mixup_balanced_check",
+    "num_convs_per_block": 2,
+    "mixup_alpha": 0.2,
+    "mixup_prob": 0,
+    "early_stop_patience": 10,
+    "img_size": 224
+  }
+}

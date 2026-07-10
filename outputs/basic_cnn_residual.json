@@ -1,0 +1,32 @@
+{
+  "run_name": "part1_custom_cnn_best",
+  "best_val_acc": 0.29912991299129915,
+  "best_epoch": 31,
+  "test_loss": 2.8953430794968535,
+  "test_acc": 0.2889288928892889,
+  "elapsed_min": 43.33405290444692,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 35,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.1,
+    "dropout": 0.35,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "strong",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "part1_custom_cnn_best"
+  }
+}

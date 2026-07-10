@@ -1,0 +1,38 @@
+{
+  "run_name": "cnn_ne_config",
+  "best_val_acc": 0.27302730273027304,
+  "best_epoch": 27,
+  "test_loss": 2.8004255166040894,
+  "test_acc": 0.27482748274827484,
+  "elapsed_min": 64.35466786623002,
+  "total_parameters": 5005348,
+  "trainable_parameters": 5005348,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 30,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 5e-05,
+    "label_smoothing": 0.1,
+    "dropout": 0.25,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "strong",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "cnn_ne_config",
+    "num_convs_per_block": 2,
+    "block_dropout": 0.05,
+    "mixup_alpha": 0.2,
+    "mixup_prob": 0.3,
+    "early_stop_patience": 10,
+    "img_size": 224
+  }
+}

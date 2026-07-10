@@ -1,5 +1,5 @@
 data/
-outputs/
+outputs/ckpts
 .ipynb_checkpoints/
 __pycache__/
 *.pyc

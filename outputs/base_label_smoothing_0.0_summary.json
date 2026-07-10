@@ -1,0 +1,36 @@
+{
+  "run_name": "base_label_smoothing_0.0",
+  "best_val_acc": 0.5673567356735674,
+  "best_epoch": 62,
+  "test_loss": 1.7510694480321445,
+  "test_acc": 0.5616561656165616,
+  "elapsed_min": 77.06582421461741,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 70,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.0,
+    "dropout": 0.25,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "light",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "base_label_smoothing_0.0",
+    "mixup_alpha": 0.2,
+    "mixup_prob": 0.5,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "run_name": "residual_block_lr_onecycle",
+  "best_val_acc": 0.387038703870387,
+  "best_epoch": 70,
+  "test_loss": 2.7290488831674304,
+  "test_acc": 0.38913891389138916,
+  "elapsed_min": 95.59155749877294,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 80,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 5e-05,
+    "label_smoothing": 0.1,
+    "dropout": 0.25,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "strong",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "residual_block_lr_onecycle",
+    "num_convs_per_block": 2,
+    "block_dropout": 0.05,
+    "mixup_alpha": 0.2,
+    "mixup_prob": 0.3,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

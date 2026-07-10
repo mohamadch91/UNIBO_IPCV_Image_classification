@@ -1,0 +1,36 @@
+{
+  "run_name": "base_mixup_prob_0.7",
+  "best_val_acc": 0.5814581458145814,
+  "best_epoch": 66,
+  "test_loss": 1.8252613686814239,
+  "test_acc": 0.5883588358835884,
+  "elapsed_min": 77.1933888832728,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 70,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.2,
+    "dropout": 0.25,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "light",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "base_mixup_prob_0.7",
+    "mixup_alpha": 0.2,
+    "mixup_prob": 0.7,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

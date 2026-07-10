@@ -1,0 +1,38 @@
+{
+  "run_name": "residual_block_2_lr_80epochs",
+  "best_val_acc": 0.35283528352835286,
+  "best_epoch": 47,
+  "test_loss": 2.796829290587445,
+  "test_acc": 0.36483648364836485,
+  "elapsed_min": 59.519752434889476,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 80,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 5e-05,
+    "label_smoothing": 0.1,
+    "dropout": 0.25,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "strong",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "residual_block_2_lr_80epochs",
+    "num_convs_per_block": 2,
+    "block_dropout": 0.05,
+    "mixup_alpha": 0.2,
+    "mixup_prob": 0.3,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "run_name": "residual_block_aug_both",
+  "best_val_acc": 0.21002100210021002,
+  "best_epoch": 45,
+  "test_loss": 3.5979306163495988,
+  "test_acc": 0.21002100210021002,
+  "elapsed_min": 61.175378751754764,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 50,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.1,
+    "dropout": 0.25,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "light",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "residual_block_aug_both",
+    "num_convs_per_block": 2,
+    "block_dropout": 0,
+    "mixup_alpha": 0.2,
+    "mixup_prob": 0,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}
