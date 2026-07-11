@@ -1,0 +1,36 @@
+{
+  "run_name": "resnet_mixup_alpha_0.4",
+  "best_val_acc": 0.2607260726072607,
+  "best_epoch": 36,
+  "test_loss": 3.334584392658626,
+  "test_acc": 0.27872787278727873,
+  "elapsed_min": 61.36308954556783,
+  "total_parameters": 11227812,
+  "trainable_parameters": 51300,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 40,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.2,
+    "dropout": 0.5,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "resnet_strong",
+    "random_erasing": true,
+    "freeze_backbone": true,
+    "run_name": "resnet_mixup_alpha_0.4",
+    "mixup_alpha": 0.4,
+    "mixup_prob": 1,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

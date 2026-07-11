@@ -1,0 +1,36 @@
+{
+  "run_name": "resnet_base",
+  "best_val_acc": 0.23642364236423644,
+  "best_epoch": 36,
+  "test_loss": 3.4751204231140886,
+  "test_acc": 0.25412541254125415,
+  "elapsed_min": 61.42174330552419,
+  "total_parameters": 11227812,
+  "trainable_parameters": 51300,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 40,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.2,
+    "dropout": 0.5,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "resnet_strong",
+    "random_erasing": true,
+    "freeze_backbone": true,
+    "run_name": "resnet_base",
+    "mixup_alpha": 1,
+    "mixup_prob": 1,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

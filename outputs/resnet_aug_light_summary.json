@@ -1,0 +1,36 @@
+{
+  "run_name": "resnet_aug_light",
+  "best_val_acc": 0.2934293429342934,
+  "best_epoch": 40,
+  "test_loss": 3.30245202330902,
+  "test_acc": 0.2907290729072907,
+  "elapsed_min": 62.52920077641805,
+  "total_parameters": 11227812,
+  "trainable_parameters": 51300,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 40,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.2,
+    "dropout": 0.5,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "light",
+    "random_erasing": true,
+    "freeze_backbone": true,
+    "run_name": "resnet_aug_light",
+    "mixup_alpha": 1,
+    "mixup_prob": 1,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

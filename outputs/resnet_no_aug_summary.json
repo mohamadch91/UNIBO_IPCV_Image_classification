@@ -1,0 +1,36 @@
+{
+  "run_name": "resnet_no_aug",
+  "best_val_acc": 0.19831983198319833,
+  "best_epoch": 39,
+  "test_loss": 3.5791653799931997,
+  "test_acc": 0.19891989198919893,
+  "elapsed_min": 59.19118553002675,
+  "total_parameters": 11227812,
+  "trainable_parameters": 51300,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 40,
+    "lr": 0.001,
+    "head_lr": null,
+    "wd": 0.0001,
+    "label_smoothing": 0.2,
+    "dropout": 0.5,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "none",
+    "random_erasing": true,
+    "freeze_backbone": true,
+    "run_name": "resnet_no_aug",
+    "mixup_alpha": 1,
+    "mixup_prob": 1,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}
