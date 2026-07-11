@@ -297,3 +297,5 @@ I think because of all mixup and dropout together .
 so I will decrease the droput and try again.
 reduce droput to 0.15 and epoch to 70 also lr to 3e-3
 run name: best_model_lr_3e-3_alpha_1_prob_0.8_epoch_70_droput_0.15_wd_5e-4_ls_0.1
+
+run2: best_model_lr_3e-3_alpha_0.8_prob_0.7_epoch_70_droput_0.15_wd_5e-4_ls_0.1
