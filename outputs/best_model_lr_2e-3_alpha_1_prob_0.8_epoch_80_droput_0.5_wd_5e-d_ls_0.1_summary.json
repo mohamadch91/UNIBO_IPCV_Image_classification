@@ -1,0 +1,36 @@
+{
+  "run_name": "best_model_lr_2e-3_alpha_1_prob_0.8_epoch_80_droput_0.5_wd_5e-d_ls_0.1",
+  "best_val_acc": 0.558055805580558,
+  "best_epoch": 78,
+  "test_loss": 1.737527135110209,
+  "test_acc": 0.5613561356135613,
+  "elapsed_min": 79.76952962875366,
+  "total_parameters": 2824580,
+  "trainable_parameters": 2824580,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 80,
+    "lr": 0.002,
+    "head_lr": null,
+    "wd": 0.0005,
+    "label_smoothing": 0.1,
+    "dropout": 0.5,
+    "channels": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "use_batch_norm": true,
+    "augmentation": "light",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "best_model_lr_2e-3_alpha_1_prob_0.8_epoch_80_droput_0.5_wd_5e-d_ls_0.1",
+    "mixup_alpha": 1,
+    "mixup_prob": 0.8,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

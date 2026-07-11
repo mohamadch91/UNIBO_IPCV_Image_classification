@@ -291,3 +291,9 @@ try only one of them ligh- no centercrop , strong center crop,strong no center c
 we reached the 50% goal with light augmentation, and center crop 
 this will be our base for training hyper prarameters
 
+--- after all i try all best hyperparams to gether but it makes it worse
+run name: best_model_lr_2e-3_alpha_1_prob_0.8_epoch_80_droput_0.5_wd_5e-d_ls_0.1
+I think because of all mixup and dropout together .
+so I will decrease the droput and try again.
+reduce droput to 0.15 and epoch to 70 also lr to 3e-3
+run name: best_model_lr_3e-3_alpha_1_prob_0.8_epoch_70_droput_0.15_wd_5e-4_ls_0.1
