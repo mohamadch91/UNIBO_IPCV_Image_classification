@@ -54,7 +54,7 @@ GROUP_TITLES = {
 
 REQUIRED_HISTORY_COLUMNS = {"epoch", "val_loss", "val_acc"}
 RESNET18_PATTERN = re.compile(r"resnet[\s_-]*18", flags=re.IGNORECASE)
-MAIN_RUN_PATTERN = re.compile(r"resnet[\s_-]*18", flags=re.IGNORECASE)
+MAIN_RUN_PATTERN = re.compile(r"best_", flags=re.IGNORECASE)
 
 DUPLICATE_COPY_PATTERN = re.compile(r"\s*\(\d+\)$")
 
@@ -62,7 +62,7 @@ DUPLICATE_COPY_PATTERN = re.compile(r"\s*\(\d+\)$")
 def is_resnet18(name: str) -> bool:
     """Return True for names containing resnet18/resnet_18/resnet-18."""
 
-    return bool(RESNET18_PATTERN.search(str(name)))
+    return bool(RESNET18_PATTERN.search(str(name)) or MAIN_RUN_PATTERN.search(str(name)))
 
 
 def classify_experiment(name: str) -> str | None:
