@@ -1,0 +1,37 @@
+{
+  "run_name": "resnet18_same_hyperparameters_freeze_backbone",
+  "best_val_acc": 0.34443444344434443,
+  "best_epoch": 68,
+  "test_loss": 2.7033891583433247,
+  "test_acc": 0.34503450345034503,
+  "elapsed_min": 68.22549256483714,
+  "total_parameters": 11227812,
+  "trainable_parameters": 51300,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "image_size": 224,
+    "augmentation": "light",
+    "random_erasing": true,
+    "dropout": 0.0,
+    "mixup_alpha": 0.85,
+    "mixup_prob": 0.75,
+    "label_smoothing": 0.1,
+    "channels": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "use_batch_norm": true,
+    "freeze_backbone": true,
+    "head_lr": null,
+    "lr": 0.003,
+    "wd": 0.0005,
+    "early_stop_patience": 12,
+    "min_delta": 0.0001,
+    "batch_size": 64,
+    "num_epochs": 70,
+    "run_name": "resnet18_same_hyperparameters_freeze_backbone"
+  }
+}

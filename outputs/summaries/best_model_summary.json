@@ -1,10 +1,10 @@
 {
-  "run_name": "best_model_lr_3e-3_alpha_0.8_prob_0.7_epoch_70_droput_0.15_wd_5e-d_ls_0.1_ch",
-  "best_val_acc": 0.025502550255025503,
-  "best_epoch": 1,
-  "test_loss": 4.541782820936513,
-  "test_acc": 0.027002700270027002,
-  "elapsed_min": 0.9795085668563843,
+  "run_name": "best_model",
+  "best_val_acc": 0.5604560456045604,
+  "best_epoch": 68,
+  "test_loss": 1.716769234468155,
+  "test_acc": 0.5661566156615662,
+  "elapsed_min": 67.74124363263448,
   "total_parameters": 2824580,
   "trainable_parameters": 2824580,
   "cfg": {
@@ -14,8 +14,8 @@
     "augmentation": "light",
     "random_erasing": true,
     "dropout": 0.15,
-    "mixup_alpha": 0.8,
-    "mixup_prob": 0.7,
+    "mixup_alpha": 0.85,
+    "mixup_prob": 0.75,
     "label_smoothing": 0.1,
     "channels": [
       32,
@@ -28,10 +28,10 @@
     "head_lr": null,
     "lr": 0.003,
     "wd": 0.0005,
-    "early_stop_patience": 20,
+    "early_stop_patience": 12,
     "min_delta": 0.0001,
     "batch_size": 64,
-    "num_epochs": 1,
-    "run_name": "best_model_lr_3e-3_alpha_0.8_prob_0.7_epoch_70_droput_0.15_wd_5e-d_ls_0.1_ch"
+    "num_epochs": 70,
+    "run_name": "best_model"
   }
 }

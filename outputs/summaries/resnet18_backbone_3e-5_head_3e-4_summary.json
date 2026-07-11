@@ -1,0 +1,36 @@
+{
+  "run_name": "resnet18_backbone_3e-5_head_3e-4",
+  "best_val_acc": 0.49084908490849083,
+  "best_epoch": 39,
+  "test_loss": 2.1719003869648135,
+  "test_acc": 0.5013501350135013,
+  "elapsed_min": 63.013458315531416,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "batch_size": 64,
+    "num_epochs": 40,
+    "lr": 3e-05,
+    "head_lr": 0.0003,
+    "wd": 0.0001,
+    "label_smoothing": 0.2,
+    "dropout": 0.5,
+    "channels": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "use_batch_norm": true,
+    "augmentation": "resnet_strong",
+    "random_erasing": true,
+    "freeze_backbone": false,
+    "run_name": "resnet18_backbone_3e-5_head_3e-4",
+    "mixup_alpha": 1,
+    "mixup_prob": 1,
+    "early_stop_patience": 20,
+    "img_size": 224
+  }
+}

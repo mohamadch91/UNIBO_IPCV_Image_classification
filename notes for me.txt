@@ -300,6 +300,6 @@ run name: best_model_lr_3e-3_alpha_1_prob_0.8_epoch_70_droput_0.15_wd_5e-4_ls_0.
 
 run2: best_model_lr_3e-3_alpha_0.8_prob_0.7_epoch_70_droput_0.15_wd_5e-4_ls_0.1
 
-this is my final run for part1. its obvously i can increase the channel and get higher accuracy but
+this is my final run for part1. its obvously i can increase the channel and get higher accuracy or increase epochs.
 model will be the small and also loss is lower with increasing channel we can get 4 or 5% more accuracy but i think its not worth it because of the model size and also loss is lower with increasing channel. so i will keep the channel 256 for part2 and also i will use the best hyperparams from part1 to train the model in part2.
 
