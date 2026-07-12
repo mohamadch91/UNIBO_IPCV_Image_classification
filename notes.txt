@@ -22,3 +22,4 @@ Also for example we can just train res-net 18 backbone and freeze the rest layer
 
 hyperparameters should be on 1 cell for each modification and we should clearly state the changes made to the hyperparameters in each cell.
 
+remember to show output
