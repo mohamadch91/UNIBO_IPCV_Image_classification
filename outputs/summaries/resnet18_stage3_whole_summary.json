@@ -1,0 +1,39 @@
+{
+  "run_name": "resnet18_stage3_whole",
+  "best_val_acc": 0.675967596759676,
+  "best_epoch": 58,
+  "test_loss": 1.494452560337821,
+  "test_acc": 0.6726672667266727,
+  "elapsed_min": 87.49446604649226,
+  "total_parameters": 11227812,
+  "trainable_parameters": 11227812,
+  "cfg": {
+    "resize_size": 352,
+    "crop_size": 320,
+    "image_size": 320,
+    "augmentation": "light",
+    "dropout": 0.1,
+    "mixup_alpha": 0.2,
+    "mixup_prob": 0.25,
+    "label_smoothing": 0.05,
+    "channels": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "use_batch_norm": true,
+    "freeze_backbone": false,
+    "head_lr": 0.0004,
+    "lr": 0.0001,
+    "wd": 0.0001,
+    "early_stop_patience": 12,
+    "min_delta": 0.0001,
+    "batch_size": 64,
+    "num_epochs": 60,
+    "run_name": "resnet18_stage3_whole",
+    "num_classes": 100,
+    "trainable_stage": "whole",
+    "initial_checkpoint": "outputs/ckpts/resnet18_stage2_layer4.pt"
+  }
+}

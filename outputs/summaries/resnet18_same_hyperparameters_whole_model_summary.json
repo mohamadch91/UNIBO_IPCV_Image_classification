@@ -1,10 +1,10 @@
 {
   "run_name": "resnet18_same_hyperparameters_whole_model",
-  "best_val_acc": 0.7194719471947195,
+  "best_val_acc": 0.7092709270927092,
   "best_epoch": 65,
-  "test_loss": 1.3300399986287692,
-  "test_acc": 0.7212721272127213,
-  "elapsed_min": 81.27985691626867,
+  "test_loss": 1.3293536534153445,
+  "test_acc": 0.7278727872787278,
+  "elapsed_min": 82.10628618399302,
   "total_parameters": 11227812,
   "trainable_parameters": 11227812,
   "cfg": {
@@ -12,7 +12,6 @@
     "crop_size": 224,
     "image_size": 224,
     "augmentation": "light",
-    "random_erasing": true,
     "dropout": 0.0,
     "mixup_alpha": 0.85,
     "mixup_prob": 0.75,
