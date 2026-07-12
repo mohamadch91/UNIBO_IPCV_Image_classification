@@ -1,0 +1,36 @@
+{
+  "run_name": "best_model_no_augmentation",
+  "best_val_acc": 0.11641164116411641,
+  "best_epoch": 50,
+  "test_loss": 4.236599610583617,
+  "test_acc": 0.11461146114611462,
+  "elapsed_min": 59.16732043027878,
+  "total_parameters": 2824580,
+  "trainable_parameters": 2824580,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "image_size": 224,
+    "augmentation": "none",
+    "dropout": 0.15,
+    "mixup_alpha": 0.85,
+    "mixup_prob": 0.75,
+    "label_smoothing": 0.1,
+    "channels": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "use_batch_norm": true,
+    "freeze_backbone": false,
+    "head_lr": null,
+    "lr": 0.003,
+    "wd": 0.0005,
+    "early_stop_patience": 12,
+    "min_delta": 0.0001,
+    "batch_size": 64,
+    "num_epochs": 70,
+    "run_name": "best_model_no_augmentation"
+  }
+}

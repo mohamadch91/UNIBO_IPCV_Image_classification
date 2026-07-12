@@ -1,10 +1,10 @@
 {
   "run_name": "best_model",
-  "best_val_acc": 0.5604560456045604,
-  "best_epoch": 68,
-  "test_loss": 1.716769234468155,
-  "test_acc": 0.5661566156615662,
-  "elapsed_min": 67.74124363263448,
+  "best_val_acc": 0.564956495649565,
+  "best_epoch": 69,
+  "test_loss": 1.7122391418333422,
+  "test_acc": 0.5712571257125713,
+  "elapsed_min": 69.54951508442561,
   "total_parameters": 2824580,
   "trainable_parameters": 2824580,
   "cfg": {
@@ -12,7 +12,6 @@
     "crop_size": 224,
     "image_size": 224,
     "augmentation": "light",
-    "random_erasing": true,
     "dropout": 0.15,
     "mixup_alpha": 0.85,
     "mixup_prob": 0.75,

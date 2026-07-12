@@ -1,0 +1,36 @@
+{
+  "run_name": "best_model_low_learning_rate",
+  "best_val_acc": 0.25472547254725475,
+  "best_epoch": 60,
+  "test_loss": 2.866470565818789,
+  "test_acc": 0.2526252625262526,
+  "elapsed_min": 71.0107184012731,
+  "total_parameters": 2824580,
+  "trainable_parameters": 2824580,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "image_size": 224,
+    "augmentation": "light",
+    "dropout": 0.15,
+    "mixup_alpha": 0.85,
+    "mixup_prob": 0.75,
+    "label_smoothing": 0.1,
+    "channels": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "use_batch_norm": true,
+    "freeze_backbone": false,
+    "head_lr": null,
+    "lr": 0.0001,
+    "wd": 0.0005,
+    "early_stop_patience": 12,
+    "min_delta": 0.0001,
+    "batch_size": 64,
+    "num_epochs": 70,
+    "run_name": "best_model_low_learning_rate"
+  }
+}

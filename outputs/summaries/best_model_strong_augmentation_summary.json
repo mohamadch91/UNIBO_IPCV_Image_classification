@@ -1,0 +1,36 @@
+{
+  "run_name": "best_model_strong_augmentation",
+  "best_val_acc": 0.38043804380438045,
+  "best_epoch": 63,
+  "test_loss": 2.5756991638494906,
+  "test_acc": 0.38613861386138615,
+  "elapsed_min": 73.03316403627396,
+  "total_parameters": 2824580,
+  "trainable_parameters": 2824580,
+  "cfg": {
+    "resize_size": 256,
+    "crop_size": 224,
+    "image_size": 224,
+    "augmentation": "strong",
+    "dropout": 0.15,
+    "mixup_alpha": 0.85,
+    "mixup_prob": 0.75,
+    "label_smoothing": 0.1,
+    "channels": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "use_batch_norm": true,
+    "freeze_backbone": false,
+    "head_lr": null,
+    "lr": 0.003,
+    "wd": 0.0005,
+    "early_stop_patience": 12,
+    "min_delta": 0.0001,
+    "batch_size": 64,
+    "num_epochs": 70,
+    "run_name": "best_model_strong_augmentation"
+  }
+}
