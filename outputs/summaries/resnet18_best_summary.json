@@ -1,10 +1,10 @@
 {
   "run_name": "resnet18_best",
-  "best_val_acc": 0.6801680168016802,
-  "best_epoch": 64,
-  "test_loss": 1.5267934445822664,
-  "test_acc": 0.6885688568856886,
-  "elapsed_min": 80.08284536600112,
+  "best_val_acc": 0.7158715871587159,
+  "best_epoch": 98,
+  "test_loss": 1.3404139648355093,
+  "test_acc": 0.7302730273027302,
+  "elapsed_min": 115.03355797926585,
   "total_parameters": 11227812,
   "trainable_parameters": 11227812,
   "cfg": {
@@ -12,10 +12,9 @@
     "crop_size": 224,
     "image_size": 224,
     "augmentation": "light",
-    "random_erasing": true,
-    "dropout": 0,
-    "mixup_alpha": 0.9,
-    "mixup_prob": 0.3,
+    "dropout": 0.0,
+    "mixup_alpha": 1,
+    "mixup_prob": 0.8,
     "label_smoothing": 0.1,
     "channels": [
       32,
@@ -25,13 +24,14 @@
     ],
     "use_batch_norm": true,
     "freeze_backbone": false,
-    "head_lr": 0.001,
-    "lr": 0.0002,
+    "head_lr": null,
+    "lr": 0.003,
     "wd": 0.0005,
-    "early_stop_patience": 12,
+    "scheduler": "oneCyclelr",
+    "early_stop_patience": 30,
     "min_delta": 0.0001,
     "batch_size": 64,
-    "num_epochs": 70,
+    "num_epochs": 100,
     "run_name": "resnet18_best"
   }
 }

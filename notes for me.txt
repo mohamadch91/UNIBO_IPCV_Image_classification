@@ -303,3 +303,249 @@ run2: best_model_lr_3e-3_alpha_0.8_prob_0.7_epoch_70_droput_0.15_wd_5e-4_ls_0.1
 this is my final run for part1. its obvously i can increase the channel and get higher accuracy or increase epochs.
 model will be the small and also loss is lower with increasing channel we can get 4 or 5% more accuracy but i think its not worth it because of the model size and also loss is lower with increasing channel. so i will keep the channel 256 for part2 and also i will use the best hyperparams from part1 to train the model in part2.
 
+
+
+////################
+
+# ---------------------------------------------------------------------------
+# Gradual ResNet-18 fine-tuning:
+#   Stage 1: classifier only
+#   Stage 2: layer4 + classifier
+#   Stage 3: complete backbone + classifier
+# ---------------------------------------------------------------------------
+
+def configure_resnet18_stage(model: nn.Module, stage: str) -> None:
+    """Select the trainable ResNet-18 components for one training stage."""
+    # Freeze the complete network before enabling the selected components.
+    set_requires_grad(model, False)
+
+    # The classifier is trained during every stage.
+    set_requires_grad(model.fc, True)
+
+    if stage == "classifier":
+        return
+
+    if stage == "layer4":
+        set_requires_grad(model.layer4, True)
+        return
+
+    if stage == "whole":
+        set_requires_grad(model, True)
+        return
+
+    raise ValueError(f"Unknown ResNet-18 training stage: {stage}")
+
+
+def keep_frozen_batchnorm_eval(model: nn.Module, inputs) -> None:
+    """Prevent frozen BatchNorm layers from updating their running statistics."""
+    for layer in model.modules():
+        if isinstance(layer, nn.BatchNorm2d):
+            parameters = list(layer.parameters())
+
+            if parameters and not any(
+                parameter.requires_grad for parameter in parameters
+            ):
+                layer.eval()
+
+
+def get_staged_resnet18_model(
+    num_classes: int,
+    cfg: Dict[str, Any],
+) -> nn.Module:
+    """Construct one ResNet-18 stage and load the preceding checkpoint."""
+    # Construct the assignment-required ImageNet-pretrained ResNet-18.
+    model = get_resnet18_model(num_classes, cfg)
+
+    # Continue training from the strongest checkpoint of the previous stage.
+    checkpoint_path = cfg.get("initial_checkpoint")
+
+    if checkpoint_path is not None:
+        checkpoint_path = Path(checkpoint_path)
+
+        if not checkpoint_path.exists():
+            raise FileNotFoundError(
+                f"Previous-stage checkpoint was not found: {checkpoint_path}"
+            )
+
+        state_dict = torch.load(
+            checkpoint_path,
+            map_location="cpu",
+            weights_only=True,
+        )
+
+        model.load_state_dict(
+            state_dict,
+            strict=True,
+        )
+
+        print(f"Loaded initial checkpoint: {checkpoint_path}")
+
+    # Freeze or unfreeze parameters after loading the checkpoint.
+    configure_resnet18_stage(
+        model,
+        cfg["trainable_stage"],
+    )
+
+    # Trainer calls model.train() at each epoch. This hook keeps BatchNorm
+    # statistics fixed inside frozen backbone stages.
+    model.register_forward_pre_hook(
+        keep_frozen_batchnorm_eval
+    )
+
+    return model
+
+
+# ---------------------------------------------------------------------------
+# Shared high-resolution configuration
+# ---------------------------------------------------------------------------
+
+cfg_resnet_staged = copy.deepcopy(cfg_part1)
+
+# Higher resolution helps preserve fine-grained aircraft characteristics.
+
+cfg_resnet_staged["batch_size"] = 64
+
+# Use moderate regularization to avoid hiding small differences between variants.
+cfg_resnet_staged["augmentation"] = "resnet_light"
+cfg_resnet_staged["scheduler"] = "oneCyclelr"
+cfg_resnet_staged["dropout"] = 0.0
+cfg_resnet_staged["wd"] = 5e-4
+cfg_resnet_staged["label_smoothing"] = 0.1
+cfg_resnet_staged["min_delta"] = 1e-4
+cfg_resnet_staged["num_classes"] = 100
+cfg_resnet_staged["early_stop_patience"] = 20
+cfg_resnet_staged["mixup_alpha"] = 0.8
+cfg_resnet_staged["mixup_prob"] = 0.75
+cfg_resnet_staged["label_smoothing"] = 0.05
+
+
+
+# ---------------------------------------------------------------------------
+# Stage 1: train only the classifier
+# ---------------------------------------------------------------------------
+
+cfg_resnet_classifier = copy.deepcopy(cfg_resnet_staged)
+
+cfg_resnet_classifier["run_name"] = "resnet18_stage1_classifier_2"
+cfg_resnet_classifier["trainable_stage"] = "classifier"
+cfg_resnet_classifier["initial_checkpoint"] = None
+
+cfg_resnet_classifier["freeze_backbone"] = True
+cfg_resnet_classifier["num_epochs"] = 15
+
+# Only one learning rate is needed because only model.fc is trainable.
+cfg_resnet_classifier["lr"] = 3e-3
+cfg_resnet_classifier["head_lr"] = None
+
+
+
+
+# ---------------------------------------------------------------------------
+# Stage 2: train layer4 and the classifier
+# ---------------------------------------------------------------------------
+
+# cfg_resnet_layer4 = copy.deepcopy(cfg_resnet_staged)
+
+# cfg_resnet_layer4["run_name"] = "resnet18_stage2_layer4"
+# cfg_resnet_layer4["trainable_stage"] = "layer4"
+# cfg_resnet_layer4["initial_checkpoint"] = str(
+#     path_ckpts / "resnet18_stage1_classifier.pt"
+# )
+
+# cfg_resnet_layer4["freeze_backbone"] = False
+# cfg_resnet_layer4["num_epochs"] = 20
+
+# # lr is used by layer4; head_lr is used by model.fc.
+# cfg_resnet_layer4["lr"] = 1e-3
+# cfg_resnet_layer4["head_lr"] = 2e-3
+# cfg_resnet_staged["scheduler"] = "oneCyclelr"
+
+
+
+
+
+# ---------------------------------------------------------------------------
+# Stage 3: train the complete backbone and classifier
+# ---------------------------------------------------------------------------
+
+cfg_resnet_whole = copy.deepcopy(cfg_resnet_staged)
+
+cfg_resnet_whole["run_name"] = "resnet18_stage2_whole_2"
+cfg_resnet_whole["trainable_stage"] = "whole"
+cfg_resnet_whole["initial_checkpoint"] = str(
+    path_ckpts / "resnet18_stage1_classifier.pt"
+)
+
+cfg_resnet_whole["freeze_backbone"] = False
+cfg_resnet_whole["num_epochs"] = 80
+cfg_resnet_staged["scheduler"] = "oneCyclelr"
+
+# Use a conservative learning rate for pretrained parameters and a larger
+# learning rate for the task-specific classifier.
+cfg_resnet_whole["lr"] = 1e-3
+cfg_resnet_whole["head_lr"] = 1e-3
+
+
+
+
+# Display the complete staged configuration before starting training.
+display(pd.DataFrame([
+    {
+        "stage": stage_cfg["trainable_stage"],
+        "epochs": stage_cfg["num_epochs"],
+        "backbone_lr": stage_cfg["lr"],
+        "head_lr": stage_cfg["head_lr"],
+        "weight_decay": stage_cfg["wd"],
+        "mixup_alpha": stage_cfg["mixup_alpha"],
+        "mixup_probability": stage_cfg["mixup_prob"],
+        "label_smoothing": stage_cfg["label_smoothing"],
+        "initial_checkpoint": stage_cfg["initial_checkpoint"],
+    }
+    for stage_cfg in [
+        cfg_resnet_classifier,
+        # cfg_resnet_layer4,
+        cfg_resnet_whole,
+    ]
+]))
+
+
+# ---------------------------------------------------------------------------
+# Run the three stages sequentially
+# ---------------------------------------------------------------------------
+
+staged_results = {}
+
+if RUN_TRAINING:
+    # Stage 1 starts with ImageNet weights and trains only the classifier.
+    staged_results[cfg_resnet_classifier["run_name"]] = run_experiment(
+        cfg_resnet_classifier,
+        get_staged_resnet18_model,
+    )
+
+    # Stage 2 loads stage 1's best checkpoint and unfreezes layer4.
+    # staged_results[cfg_resnet_layer4["run_name"]] = run_experiment(
+    #     cfg_resnet_layer4,
+    #     get_staged_resnet18_model,
+    # )
+
+    # Stage 3 loads stage 2's best checkpoint and unfreezes the whole model.
+    staged_results[cfg_resnet_whole["run_name"]] = run_experiment(
+        cfg_resnet_whole,
+        get_staged_resnet18_model,
+    )
+
+    # Display and plot the three stages using the notebook's existing utilities.
+    display(results_to_table(staged_results))
+
+    plot_results(
+        staged_results,
+        save_path=path_plots / "resnet18_staged_training.png",
+    )
+
+    print(
+        "\nFinal model checkpoint:",
+        path_ckpts / "resnet18_stage2_whole.pt",
+    )
+
+else:
+    print("RUN_TRAINING is False")
