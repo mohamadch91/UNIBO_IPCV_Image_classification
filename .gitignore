@@ -4,4 +4,5 @@ outputs/ckpts
 __pycache__/
 *.pyc
 Labs/*
+LABS/*
 .DS_Store
